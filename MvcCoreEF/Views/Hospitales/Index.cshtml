@@ -1,0 +1,59 @@
+﻿@model List<Hospital>
+
+<h1>Lista hospitales</h1>
+
+<a asp-controller="Hospitales"
+   asp-action="Create"
+   
+   class="btn btn-warning">
+    Create
+</a>
+
+@if (Model != null)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>IdHospital</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Hospital hosp in Model)
+            {
+                <tr>
+                    <td>@hosp.IdHospital</td>
+                    <td>@hosp.Nombre</td>
+                    <td>@hosp.Direccion</td>
+                    <td>@hosp.Telefono</td>
+                    <td>
+                        <a asp-controller="Hospitales" 
+                        asp-action="Details" 
+                        asp-route-idhospital="@hosp.IdHospital"
+                        class="btn btn-info">
+                        Detalles
+                    </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Hospitales"
+                           asp-action="Edit"
+                           asp-route-idhospital="@hosp.IdHospital"
+                           class="btn btn-warning">
+                            Update
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Hospitales"
+                           asp-action="Delete"
+                           asp-route-idhospital="@hosp.IdHospital"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

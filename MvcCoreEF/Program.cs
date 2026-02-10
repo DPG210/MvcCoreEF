@@ -1,7 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using MvcCoreEF.Data;
+using MvcCoreEF.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<RepositoryHospital>();
+string conecctionString = builder.Configuration.GetConnectionString("SqlHospital");
+//EN AddDbContext, dentro de sus options hacia el Context, le indicaremos la cadena de conexion
+builder.Services.AddDbContext<HospitalContext>
+    (options=> options.UseSqlServer(conecctionString));
 
 var app = builder.Build();
 
